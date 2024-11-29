@@ -1,0 +1,19 @@
+---
+import { getCollection } from "astro:content";
+const posts = await getCollection("blog", post => {
+    return post.data.lang === "en"
+});
+console.log(posts)
+---
+
+<ul>
+  {
+    posts.map((post) => (
+      <li>
+        <a href={`${post.slug.split('/').pop()}`}>
+          <p>{post.data.title}</p>
+        </a>
+      </li>
+    ))
+  }
+</ul>
